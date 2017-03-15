@@ -1,14 +1,90 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package cz.pprochaty.web.model;
 
-/**
- *
- * @author Martin
- */
-public class Order {
+import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table(name = "cottage_order")
+public class Order implements Serializable {
+    @Id
+    @Column(name = "id_order")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Integer id_order;
     
+    @Column
+    @NotNull
+    private Integer id_user;
+    
+    @Column
+    @NotNull
+    private Integer id_address;
+    
+    @Column
+    private String note;
+    
+    @OneToMany
+    private List<Cottage> cottages;
+    
+    public Order(){
+        
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return super.equals(o); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setCottages(List<Cottage> cottages) {
+        this.cottages = cottages;
+    }
+
+    public List<Cottage> getCottages() {
+        return cottages;
+    }
+
+    public void setId_address(Integer id_address) {
+        this.id_address = id_address;
+    }
+
+    public Integer getId_address() {
+        return id_address;
+    }
+
+    public void setId_order(Integer id_order) {
+        this.id_order = id_order;
+    }
+
+    public Integer getId_order() {
+        return id_order;
+    }
+
+    public void setId_user(Integer id_user) {
+        this.id_user = id_user;
+    }
+
+    public Integer getId_user() {
+        return id_user;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public String getNote() {
+        return note;
+    }
 }

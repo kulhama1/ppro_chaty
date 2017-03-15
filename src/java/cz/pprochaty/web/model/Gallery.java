@@ -1,14 +1,95 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package cz.pprochaty.web.model;
 
-/**
- *
- * @author Martin
- */
-public class Gallery {
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import org.hibernate.validator.constraints.NotEmpty;
+
+@Entity
+@Table(name = "cottage_gallery")
+public class Gallery implements Serializable{
+    @Id
+    @Column(name = "id_gallery")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id_gallery;
+    
+    @Column
+    private Integer id_thumbnail_gallery;
+    
+    @Column
+    @NotEmpty
+    private String name;
+    
+    @Column
+    private String description;
+    
+    @JsonIgnore
+    @OneToMany
+    @JoinColumn(name = "id_gallery")
+    private List<Image> images;
+    
+    public Gallery(){
+        
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return super.equals(o); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setId_gallery(Integer id_gallery) {
+        this.id_gallery = id_gallery;
+    }
+
+    public Integer getId_gallery() {
+        return id_gallery;
+    }
+
+    public void setId_thumbnail_gallery(Integer id_thumbnail_gallery) {
+        this.id_thumbnail_gallery = id_thumbnail_gallery;
+    }
+
+    public Integer getId_thumbnail_gallery() {
+        return id_thumbnail_gallery;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
     
 }
