@@ -24,7 +24,7 @@ public class User implements Serializable {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_user;
+    private Integer id_user;
     private int id_address;
     
     @Column
@@ -62,12 +62,23 @@ public class User implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        return super.equals(o); //To change body of generated methods, choose Tools | Templates.
+        if (this == o) return true;
+        if ( !(o instanceof User) ) return false;
+
+        final User user = (User) o;
+
+        if ( !user.getId_user().equals( this.getId_user()) ) return false;
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode(); //To change body of generated methods, choose Tools | Templates.
+        final int prime = 40; 
+        int result = 2; 
+        result = prime * result;
+        result += ((id_user == null) ? 0 : id_user.hashCode());
+        result += ((name == null) ? 0 : name.hashCode());
+        return result;
     }
 
     public String getEmail() {
@@ -78,7 +89,7 @@ public class User implements Serializable {
         return id_address;
     }
 
-    public int getId_user() {
+    public Integer getId_user() {
         return id_user;
     }
 

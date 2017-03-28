@@ -40,12 +40,23 @@ public class Image implements Serializable{
 
     @Override
     public boolean equals(Object o) {
-        return super.equals(o); //To change body of generated methods, choose Tools | Templates.
+        if (this == o) return true;
+        if ( !(o instanceof Image) ) return false;
+
+        final Image image = (Image) o;
+
+        if ( !image.getId_image().equals(this.getId_image()) ) return false;
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode(); //To change body of generated methods, choose Tools | Templates.
+        final int prime = 35; 
+        int result = 1; 
+        result = prime * result;
+        result += ((id_image == null) ? 0 : id_image.hashCode());
+        result += ((image_alt == null) ? 0 : image_alt.hashCode());
+        return result;
     }
 
     public String getDescription() {

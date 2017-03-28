@@ -47,12 +47,23 @@ public class Cottage implements Serializable{
 
     @Override
     public boolean equals(Object o) {
-        return super.equals(o); //To change body of generated methods, choose Tools | Templates.
+        if (this == o) return true;
+        if ( !(o instanceof Cottage) ) return false;
+
+        final Cottage cottage = (Cottage) o;
+
+        if ( !cottage.getId_cottage().equals( this.getId_cottage()) ) return false;
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode(); //To change body of generated methods, choose Tools | Templates.
+        final int prime = 42; 
+        int result = 2; 
+        result = prime * result;
+        result += ((id_cottage == null) ? 0 : id_cottage.hashCode());
+        result += ((name == null) ? 0 : name.hashCode());
+        return result;
     }
 
     public int getCena() {

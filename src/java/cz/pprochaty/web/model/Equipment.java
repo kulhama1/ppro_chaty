@@ -16,7 +16,7 @@ public class Equipment implements Serializable {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_equipment;
+    private Integer id_equipment;
     
     @Column
     @NotEmpty
@@ -31,15 +31,26 @@ public class Equipment implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        return super.equals(o); //To change body of generated methods, choose Tools | Templates.
+        if (this == o) return true;
+        if ( !(o instanceof Equipment) ) return false;
+
+        final Equipment equipment = (Equipment) o;
+
+        if ( !equipment.getId_equipment().equals(this.getId_equipment()) ) return false;
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode(); //To change body of generated methods, choose Tools | Templates.
+        final int prime = 35; 
+        int result = 1; 
+        result = prime * result;
+        result += ((id_equipment == null) ? 0 : id_equipment.hashCode());
+        result += ((name == null) ? 0 : name.hashCode());
+        return result;
     }
 
-    public int getId_equipment() {
+    public Integer getId_equipment() {
         return id_equipment;
     }
 

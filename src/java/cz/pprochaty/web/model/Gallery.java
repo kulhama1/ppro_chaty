@@ -43,12 +43,23 @@ public class Gallery implements Serializable{
 
     @Override
     public boolean equals(Object o) {
-        return super.equals(o); //To change body of generated methods, choose Tools | Templates.
+        if (this == o) return true;
+        if ( !(o instanceof Gallery) ) return false;
+
+        final Gallery gallery = (Gallery) o;
+
+        if ( !gallery.getId_gallery().equals(this.getId_gallery()) ) return false;
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode(); //To change body of generated methods, choose Tools | Templates.
+        final int prime = 27; 
+        int result = 1; 
+        result = prime * result;
+        result += ((id_gallery == null) ? 0 : id_gallery.hashCode());
+        result += ((name == null) ? 0 : name.hashCode());
+        return result;
     }
 
     public void setDescription(String description) {

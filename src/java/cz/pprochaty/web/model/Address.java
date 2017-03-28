@@ -15,7 +15,7 @@ public class Address implements Serializable {
     @Id
     @Column(name = "id_address")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_address;
+    private Integer id_address;
     
     @Column
     @NotEmpty
@@ -34,15 +34,26 @@ public class Address implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        return super.equals(o); //To change body of generated methods, choose Tools | Templates.
+        if (this == o) return true;
+        if ( !(o instanceof Address) ) return false;
+
+        final Address address = (Address) o;
+
+        if ( !address.getId_address().equals( this.getId_address()) ) return false;
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode(); //To change body of generated methods, choose Tools | Templates.
+        final int prime = 25; 
+        int result = 1; 
+        result = prime * result;
+        result += ((id_address == null) ? 0 : id_address.hashCode());
+        result += ((address == null) ? 0 : address.hashCode());
+        return result;
     }
 
-    public int getId_address() {
+    public Integer getId_address() {
         return id_address;
     }
 

@@ -40,12 +40,23 @@ public class Order implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        return super.equals(o); //To change body of generated methods, choose Tools | Templates.
+        if (this == o) return true;
+        if ( !(o instanceof Order) ) return false;
+
+        final Order order = (Order) o;
+
+        if ( !order.getId_order().equals(this.getId_order()) ) return false;
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode(); //To change body of generated methods, choose Tools | Templates.
+        final int prime = 38; 
+        int result = 2; 
+        result = prime * result;
+        result += ((id_order == null) ? 0 : id_order.hashCode());
+        result += ((id_address == null) ? 0 : id_address.hashCode());
+        return result;
     }
 
     public void setCottages(List<Cottage> cottages) {
