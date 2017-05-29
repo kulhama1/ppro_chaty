@@ -1,0 +1,97 @@
+package cz.uhk.fim.kulhama1.skolniprojectchaty.model;
+
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "cottage_image")
+public class Image{
+    
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int id;
+    
+    @Column
+    String image_alt;
+    
+    @Column
+    String image_src;
+    
+    @Column
+    String description;
+    
+    @Column
+    String thumbnail_src;
+    
+    @Column
+    int id_gallery;
+    
+    public Image(){
+        super();
+    }
+
+    public Image(int id, String image_alt, String image_src, String description, String thumbnail_src, int id_gallery){
+        super();
+        this.id = id;
+        this.image_alt = image_alt;
+        this.image_src = image_src;
+        this.description = description;
+        this.thumbnail_src = thumbnail_src;
+        this.id_gallery = id_gallery;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getId_gallery() {
+        return id_gallery;
+    }
+
+    public void setId_gallery(Integer id_gallery) {
+        this.id_gallery = id_gallery;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getImage_alt() {
+        return image_alt;
+    }
+
+    public void setImage_alt(String image_alt) {
+        this.image_alt = image_alt;
+    }
+
+    public String getImage_src() {
+        return image_src;
+    }
+
+    public void setImage_src(String image_src) {
+        this.image_src = image_src;
+    }
+
+    public String getThumbnail_src() {
+        return thumbnail_src;
+    }
+
+    public void setThumbnail_src(String thumbnail_src) {
+        this.thumbnail_src = thumbnail_src;
+    }
+}
+
