@@ -1,9 +1,7 @@
 package cz.uhk.fim.kulhama1.skolniprojectchaty.service;
 
 import cz.uhk.fim.kulhama1.skolniprojectchaty.dao.GalleryDAO;
-import cz.uhk.fim.kulhama1.skolniprojectchaty.dao.ImageDAO;
 import cz.uhk.fim.kulhama1.skolniprojectchaty.model.Gallery;
-import cz.uhk.fim.kulhama1.skolniprojectchaty.model.Image;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

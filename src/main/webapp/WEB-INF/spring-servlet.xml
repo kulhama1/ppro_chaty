@@ -34,6 +34,7 @@
 			<beans:list>
 				<beans:value>cz.uhk.fim.kulhama1.skolniprojectchaty.model.Image</beans:value>
                                 <beans:value>cz.uhk.fim.kulhama1.skolniprojectchaty.model.Gallery</beans:value>
+                                <beans:value>cz.uhk.fim.kulhama1.skolniprojectchaty.model.Group</beans:value>
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">

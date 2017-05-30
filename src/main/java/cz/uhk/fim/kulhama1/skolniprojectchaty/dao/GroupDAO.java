@@ -1,7 +1,6 @@
-
 package cz.uhk.fim.kulhama1.skolniprojectchaty.dao;
 
-import cz.uhk.fim.kulhama1.skolniprojectchaty.model.Gallery;
+import cz.uhk.fim.kulhama1.skolniprojectchaty.model.Group;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class GalleryDAO{
+public class GroupDAO{
 
     @Autowired
     SessionFactory sessionFactory;
@@ -18,32 +17,32 @@ public class GalleryDAO{
         this.sessionFactory = sf;
     }
     
-    public List<Gallery> getAllGalleries() {
+    public List<Group> getAllGroups() {
         Session session = this.sessionFactory.getCurrentSession();
-        List<Gallery> galleryList = session.createQuery("from Gallery").list();
-        return galleryList;
+        List<Group> groupList = session.createQuery("from Group").list();
+        return groupList;
     }
     
-    public Gallery getGallery(int id) {
+    public Group getGroup(int id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Gallery gallery = (Gallery) session.get(Gallery.class, new Integer(id));
-		return gallery;
+		Group group = (Group) session.get(Group.class, new Integer(id));
+		return group;
 	}
-    public Gallery addGallery(Gallery gallery) {
+    public Group addGroup(Group group) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(gallery);
-		return gallery;
+		session.persist(group);
+		return group;
 	}
 
-    public void updateGallery(Gallery gallery) {
+    public void updateGroup(Group group) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.update(gallery);
+		session.update(group);
 	}
 
     
-    public void deleteGallery(int id) {
+    public void deleteGroup(int id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Gallery g = (Gallery) session.load(Gallery.class, new Integer(id));
+		Group g = (Group) session.load(Group.class, new Integer(id));
 		if (null != g) {
 			session.delete(g);
 		}
