@@ -33,15 +33,15 @@ th {
 </style>
 </head>
 <body>
-<form:form method="post" modelAttribute="image" action="/SkolniProjectChaty/addImage">
+<form:form method="post" modelAttribute="image" action="/SkolniProjectChaty/addImage" enctype="multipart/form-data">
 <table>
 		<tr>
 			<th colspan="5">Add Image</th>
 		</tr>
 		<tr>
 		<form:hidden path="id" />
-          <td><form:label path="image_alt">Image alt:</form:label></td>
-          <td><form:input path="image_alt" size="30" maxlength="30"></form:input></td>
+          <td><label path="soubor">soubor: </label></td>
+          <td><input type="file" name="file" id="file" /> <br/></td>
                 </tr>
 		<tr>
 	  <td><form:label path="image_src">Image_src:</form:label></td>

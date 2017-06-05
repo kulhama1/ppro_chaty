@@ -10,7 +10,7 @@
 	<annotation-driven />
 
 	<resources mapping="/resources/**" location="/resources/" />
-
+        
 	<beans:bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
@@ -21,7 +21,7 @@
 		destroy-method="close">
 		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<beans:property name="url"
-			value="jdbc:mysql://localhost:3306/ppro" />
+			value="jdbc:mysql://localhost:3306/ppro?useEncoding=true&amp;characterEncoding=UTF-8"/>
 		<beans:property name="username" value="root" />
 		<beans:property name="password" value="" />
 	</beans:bean>
@@ -35,6 +35,9 @@
 				<beans:value>cz.uhk.fim.kulhama1.skolniprojectchaty.model.Image</beans:value>
                                 <beans:value>cz.uhk.fim.kulhama1.skolniprojectchaty.model.Gallery</beans:value>
                                 <beans:value>cz.uhk.fim.kulhama1.skolniprojectchaty.model.Group</beans:value>
+                                <beans:value>cz.uhk.fim.kulhama1.skolniprojectchaty.model.Address</beans:value>
+                                <beans:value>cz.uhk.fim.kulhama1.skolniprojectchaty.model.Cottage</beans:value>
+                                <beans:value>cz.uhk.fim.kulhama1.skolniprojectchaty.model.User</beans:value>
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">
@@ -54,6 +57,12 @@
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<beans:property name="sessionFactory"
 			ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+         
+        <beans:bean id="multipartResolver"
+		 class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+                        <!-- setting maximum upload size -->
+                 <beans:property name="maxUploadSize" value="100000" />
 	</beans:bean>
 
 

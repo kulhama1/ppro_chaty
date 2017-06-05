@@ -22,6 +22,10 @@ public class GroupService {
 	public Group getGroup(int id) {
 		return groupDAO.getGroup(id);
 	}
+        @Transactional
+	public Group getGroupById(int id) {
+		return groupDAO.getGroupById(id);
+	}
 
 	@Transactional
 	public void addGroup(Group group) {

@@ -1,6 +1,6 @@
 package cz.uhk.fim.kulhama1.skolniprojectchaty.dao;
 
-import cz.uhk.fim.kulhama1.skolniprojectchaty.model.Image;
+import cz.uhk.fim.kulhama1.skolniprojectchaty.model.User;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ImageDAO{
+public class UserDAO{
 
     @Autowired
     SessionFactory sessionFactory;
@@ -17,39 +17,36 @@ public class ImageDAO{
         this.sessionFactory = sf;
     }
     
-    public List<Image> getAllImages() {
+    public List<User> getAllUsers() {
         Session session = this.sessionFactory.getCurrentSession();
-        List<Image> imageList = session.createQuery("from Image").list();
-        return imageList;
+        List<User> userList = session.createQuery("from User").list();
+        return userList;
     }
     
-    public Image getImage(int id) {
+    public User getUser(int id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Image image = (Image) session.get(Image.class, new Integer(id));
-		return image;
+		User user = (User) session.get(User.class, new Integer(id));
+		return user;
 	}
-    public Image addImage(Image image) {
+    public User addUser(User user) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(image);
-		return image;
+		session.persist(user);
+		return user;
 	}
 
-    public void updateImage(Image image) {
+    public void updateUser(User user) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.update(image);
+		session.update(user);
 	}
-    
-    public Image getImagesById(int id) {
-        return (Image) sessionFactory.getCurrentSession().get(Image.class, id);
-    }
 
     
-    public void deleteImage(int id) {
+    public void deleteUser(int id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Image i = (Image) session.load(Image.class, new Integer(id));
-		if (null != i) {
-			session.delete(i);
+		User u = (User) session.load(User.class, new Integer(id));
+		if (null != u) {
+			session.delete(u);
 		}
 	}
     
 }
+

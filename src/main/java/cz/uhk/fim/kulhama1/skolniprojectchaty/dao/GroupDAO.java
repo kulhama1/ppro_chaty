@@ -47,5 +47,9 @@ public class GroupDAO{
 			session.delete(g);
 		}
 	}
+        public Group getGroupById(int id) {
+                Session session = this.sessionFactory.getCurrentSession();
+		return (Group) session.get(Group.class, id);
+    }
     
 }

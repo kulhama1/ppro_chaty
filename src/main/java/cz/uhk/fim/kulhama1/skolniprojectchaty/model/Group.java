@@ -1,10 +1,13 @@
 package cz.uhk.fim.kulhama1.skolniprojectchaty.model;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -56,4 +59,5 @@ public class Group{
     public void setDescription(String description) {
         this.description = description;
     }
+    
 }

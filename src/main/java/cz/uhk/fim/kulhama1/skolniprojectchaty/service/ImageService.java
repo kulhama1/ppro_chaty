@@ -38,4 +38,9 @@ public class ImageService {
 	public void deleteImage(int id) {
 		imageDao.deleteImage(id);
 	}
+        
+        @Transactional
+        public Image getImagesById(int id){
+                return imageDao.getImagesById(id);
+        }
 }
