@@ -40,16 +40,23 @@ th {
 		</tr>
 		<tr>
 		<form:hidden path="id_gallery" />
-          <td><form:label path="id_thumbnail_gallery">Id_thumbnail_gallery:</form:label></td>
-          <td><form:input path="id_thumbnail_gallery" size="30" maxlength="30"></form:input></td>
+                <td><form:label path="name">Name:</form:label></td>
+                <td><form:input path="name" size="30" maxlength="30"></form:input></td>
                 </tr>
-		<tr>
-	  <td><form:label path="name">Name:</form:label></td>
-          <td><form:input path="name" size="30" maxlength="30"></form:input></td>
+                <tr>
+          <td><form:label path="description">Description:</form:label></td>
+          <td><form:input path="description" size="30" maxlength="30"></form:input></td>
 		</tr>
                 <tr>
-	  <td><form:label path="description">Description:</form:label></td>
-          <td><form:input path="description" size="30" maxlength="30"></form:input></td>
+          <td><form:label path="images">Images</form:label></td> 
+          <td><form:checkboxes path="images" items="${images}" itemLabel="image_alt" itemValue="id"/></td>         
+                </tr>
+                <tr>
+          <td><form:label path="id_thumbnail_gallery">Id_thumbnail_gallery:</form:label></td>
+          <td><form:select path="id_thumbnail_gallery">
+                        <form:option value="-1" label="--- Select ---"/>
+                    </form:select></td>
+
 		</tr>
 		<tr>
 			<td colspan="3"><input type="submit"
@@ -63,21 +70,21 @@ th {
 	<table class="tg">
 	<tr>
 		<th width="80">Id</th>
-		<th width="120">Id thumbnail gallery</th>
 		<th width="120">Name</th>
                 <th width="120">Description</th>
+                <th width="120">Id thumbnail gallery</th>
 		<th width="60">Edit</th>
 		<th width="60">Delete</th>
 	</tr>
 	<c:forEach items="${listOfGalleries}" var="gallery">
 		<tr>
 			<td>${gallery.id_gallery}</td>
-			<td>${gallery.id_thumbnail_gallery}</td>
 			<td>${gallery.name}</td>
 			<td>${gallery.description}</td>
+                        <td>${gallery.id_thumbnail_gallery}</td>
                         
-			<td><a href="<c:url value='/updateGallery/${gallery.id_gallery}' />" >Edit</a></td>
-			<td><a href="<c:url value='/deleteGallery/${gallery.id_gallery}' />" >Delete</a></td>
+			<td><a href="<c:url value='/updateGallery/${gallery.id_gallery}'/>" >Edit</a></td>
+			<td><a href="<c:url value='/deleteGallery/${gallery.id_gallery}'/>" >Delete</a></td>
 		</tr>
 	</c:forEach>
 	</table>

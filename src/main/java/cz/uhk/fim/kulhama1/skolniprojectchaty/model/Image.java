@@ -15,7 +15,7 @@ public class Image{
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    Integer id;
     
     @Column
     String image_alt;
@@ -30,7 +30,7 @@ public class Image{
     String thumbnail_src;
     
     @Column
-    int id_gallery;
+    Integer id_gallery;
     
     public Image(){
         super();
@@ -54,7 +54,7 @@ public class Image{
         this.description = description;
     }
 
-    public int getId_gallery() {
+    public Integer getId_gallery() {
         return id_gallery;
     }
 
@@ -62,11 +62,11 @@ public class Image{
         this.id_gallery = id_gallery;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

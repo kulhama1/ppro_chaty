@@ -33,16 +33,23 @@ th {
 </style>
 </head>
 <body>
-<form:form method="post" modelAttribute="image" action="/SkolniProjectChaty/addImage" enctype="multipart/form-data">
+<form:form method="post" modelAttribute="image" action="/SkolniProjectChaty/addUpdateImage">
 <table>
 		<tr>
-			<th colspan="5">Add Image</th>
+			<th colspan="5">Update Image: ${image.image_alt}</th>
 		</tr>
 		<tr>
 		<form:hidden path="id" />
-          <td><label path="soubor">soubor: </label></td>
-          <td><input type="file" name="file" id="file" /><br/></td>
                 </tr>
+                <tr>
+                <form:hidden path="image_src"/>
+		</tr>
+                <tr>
+                <form:hidden path="thumbnail_src"/>
+		</tr>
+                <tr>
+                <form:hidden path="id_gallery"/>
+		</tr>
 		<tr>
 	  <td><form:label path="image_alt">Image_alt:</form:label></td>
           <td><form:input path="image_alt" size="30" maxlength="30"></form:input>
@@ -60,33 +67,5 @@ th {
 	</table> 
 </form:form>
 </br>
-<h3>Image List</h3>
-<c:if test="${!empty listOfImages}">
-	<table class="tg">
-	<tr>
-		<th width="80">Id</th>
-		<th width="120">Image alt</th>
-		<th width="120">Image src</th>
-                <th width="120">Description</th>
-                <th width="120">Thumbnail src</th>
-                <th width="120">Id gallery</th>
-		<th width="60">Edit</th>
-		<th width="60">Delete</th>
-	</tr>
-	<c:forEach items="${listOfImages}" var="image">
-		<tr>
-			<td>${image.id}</td>
-			<td>${image.image_alt}</td>
-			<td>${image.image_src}</td>
-			<td>${image.description}</td>
-			<td>${image.thumbnail_src}</td>
-			<td>${image.id_gallery}</td>
-                        
-			<td><a href="<c:url value='/updateImage/${image.id}' />" >Edit</a></td>
-			<td><a href="<c:url value='/deleteImage/${image.id}' />" >Delete</a></td>
-		</tr>
-	</c:forEach>
-	</table>
-</c:if>
 </body>
 </html>

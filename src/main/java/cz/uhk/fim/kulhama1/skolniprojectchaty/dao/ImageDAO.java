@@ -1,9 +1,11 @@
 package cz.uhk.fim.kulhama1.skolniprojectchaty.dao;
 
+import cz.uhk.fim.kulhama1.skolniprojectchaty.model.Group;
 import cz.uhk.fim.kulhama1.skolniprojectchaty.model.Image;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -40,7 +42,8 @@ public class ImageDAO{
 	}
     
     public Image getImagesById(int id) {
-        return (Image) sessionFactory.getCurrentSession().get(Image.class, id);
+                Session session = this.sessionFactory.getCurrentSession();
+		return (Image) session.get(Image.class, id);
     }
 
     
@@ -51,5 +54,19 @@ public class ImageDAO{
 			session.delete(i);
 		}
 	}
+
+    public List<Image> getImagesByRow(String row, String operand , String stringArray) {
+        return this.sessionFactory.getCurrentSession().createCriteria(Image.class).add(Restrictions.sqlRestriction(row + " " + operand + " " + stringArray)).list();  
+    }
+
+    public void updateMultipleImage(List<Image> images) {
+        try {
+            for(Image image : images) { 
+                this.sessionFactory.getCurrentSession().update(image);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
 }

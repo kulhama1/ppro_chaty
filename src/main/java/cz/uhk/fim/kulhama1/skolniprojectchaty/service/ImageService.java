@@ -43,4 +43,15 @@ public class ImageService {
         public Image getImagesById(int id){
                 return imageDao.getImagesById(id);
         }
+        
+        @Transactional
+        public List<Image> getImagesByRow(String row, String operand , String stringArray){
+            return imageDao.getImagesByRow(row, operand, stringArray);
+        }
+        
+        @Transactional
+        public void updateMultipleImage(List<Image> images) {
+            imageDao.updateMultipleImage(images);
+        }
+        
 }

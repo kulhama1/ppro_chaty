@@ -52,12 +52,19 @@ public class ImageController {
 
 	@RequestMapping(value = "/getImage/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
 	public Image getImageById(@PathVariable int id) {
-		return imageService.getImage(id);
+            return imageService.getImage(id);
+                
+	}
+        @RequestMapping(value = "/addUpdateImage", method = RequestMethod.POST, headers = "Accept=application/json")
+	public String addUpdateImage(@ModelAttribute("image") Image image) {
+            imageService.updateImage(image);
+            return "redirect:/getAllImages";
+                
 	}
 
 	@RequestMapping(value = "/addImage", method = RequestMethod.POST, headers = "Accept=application/json")
 	public String add_image(Model model, @RequestParam("file") MultipartFile file, @ModelAttribute("image")Image image, HttpServletRequest request, BindingResult result) throws IOException {
-        i = new ImageIcon(file.getOriginalFilename());
+			i = new ImageIcon(file.getOriginalFilename());
         ServletContext context = request.getServletContext();
         String rootPath = context.getRealPath("/");
         if (!file.isEmpty()) {
@@ -65,7 +72,7 @@ public class ImageController {
                 byte[] bytes = file.getBytes();
 
                 // Create the file on server
-                File serverFile = new File(rootPath+ "assets/uploads/" +i);
+                File serverFile = new File(rootPath+ "uploads/" +i);
                 BufferedOutputStream stream = new BufferedOutputStream(
                         new FileOutputStream(serverFile));
                 stream.write(bytes);
@@ -74,7 +81,7 @@ public class ImageController {
                 logger.info("Server File Location="
                         + serverFile.getAbsolutePath());
                 // tvoreni miniatury
-                ImageIcon ii = new ImageIcon(rootPath+ "assets/uploads/" +i);
+                ImageIcon ii = new ImageIcon(rootPath+ "uploads/" +i);
                 double deleni;
                 double height = ii.getIconHeight();
                 double width = ii.getIconWidth();
@@ -90,7 +97,7 @@ public class ImageController {
                                 RenderingHints.VALUE_RENDER_QUALITY));
                         boolean b = g2d.drawImage(ii.getImage(), 0, 0, (int)width, (int)height, null);
                         System.out.println(b);
-                        ImageIO.write(bi, "jpg", new File(rootPath+ "assets/uploads/thumbnail/"+i));
+                        ImageIO.write(bi, "jpg", new File(rootPath+ "uploads/thumbnail/"+i));
                        
                 
                        
@@ -103,37 +110,60 @@ public class ImageController {
             return "You failed to upload "
                     + " because the file was empty.";
         }
-        image.setImage_src("assets/uploads/" +i);
-        image.setThumbnail_src("assets/uploads/thumbnail/" +i);
+        image.setImage_src("uploads/" +i);
+        image.setThumbnail_src("uploads/thumbnail/" +i);
         imageService.addImage(image);
-        return "redirect:getAllImages";
+		
+		
+		return "redirect:/getAllImages";
     }
 
-	@RequestMapping(value = "/updateImage/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
-	public String updateImage(@PathVariable("id") int id,Model model) {
-		 model.addAttribute("image", this.imageService.getImage(id));
-	        model.addAttribute("listOfImages", this.imageService.getAllImages());
-	        return "imageDetails";
+	//@RequestMapping(value = "/detailImage", method = RequestMethod.GET, headers = "Accept=application/json")
+        //public String detailImage(Model model, @RequestParam(value = "image", required = false, defaultValue = "-1") final String imageId) {
+        /* Convert in RequestParam is returning error 400 - better this way */
+        //try {
+        //    Integer imagId = Integer.parseInt(imageId);               
+        //    Image image = imageService.getImagesById(imagId);
+
+            /* Maybe some better solution? */
+        //    if(imagId.equals(image.getId())) {
+        //        model.addAttribute("image", image);
+        //        return "imageDetailsUpdate";
+        //    } else { 
+        //        return "redirect:getAllImages";
+        //    }
+        //} catch(Exception e) {
+        //    e.printStackTrace();
+        //    return "redirect:getAllImages";
+        //}
+   // }
+       // @RequestMapping(value = "/detailImage/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
+       // public String detailImage(@PathVariable("id") int id,Model model) {
+        //	 model.addAttribute("image", this.imageService.getImage(id));
+	//         return "imageDetailsUpdate";
+	// }
+        
+        @RequestMapping(value = "/updateImage/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
+	public String updateImage(@PathVariable("id") int id, Model model) {
+                model.addAttribute("image", this.imageService.getImage(id));
+	        //model.addAttribute("listOfGroups", this.imageService.getAllImages());
+                return "imageDetailsUpdate";
 	}
 
 	@RequestMapping(value = "/deleteImage/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
-	public String delete_image(Model model, @RequestParam(value = "image", required = false, defaultValue = "-1") final String imageId, HttpServletRequest request) {
-        /* Convert in RequestParam is returning error 400 - better this way */
+	public String delete_image(@PathVariable("id") int id, Model model, HttpServletRequest request) {
+        
         ServletContext context = request.getServletContext();
         String rootPath = context.getRealPath("/");
+            
+        Image image = imageService.getImagesById(id);
+        image.getImage_src();
+        File file = new File(rootPath + image.getThumbnail_src());
+        file.delete();
+        File file1 = new File(rootPath + image.getImage_src());
+        file1.delete();
         
-        try {
-            Integer imagId = Integer.parseInt(imageId); 
-            Image image = imageService.getImagesById(imagId);
-            image.getImage_src();
-            File file = new File(rootPath + image.getThumbnail_src());
-            file.delete();
-            File file1 = new File(rootPath + image.getImage_src());
-            file1.delete();
-            imageService.deleteImage(imagId);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        return "redirect:view_images";
+        imageService.deleteImage(id);
+        return "redirect:/getAllImages";
     }	
 }

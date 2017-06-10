@@ -1,10 +1,15 @@
 package cz.uhk.fim.kulhama1.skolniprojectchaty.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -26,10 +31,10 @@ public class Gallery{
     @Column
     String description;
     
-   // @JsonIgnore
-   // @OneToMany
-   // @JoinColumn(name = "id_gallery")
-   // private List<Image> images;
+    @JsonIgnore
+    @OneToMany(cascade=CascadeType.MERGE, orphanRemoval = true)
+    @JoinColumn(name="id_gallery")
+    private List<Image> images;
     
     public Gallery(){
         super();
@@ -66,13 +71,13 @@ public class Gallery{
         return id_thumbnail_gallery;
     }
 
-    //public void setImages(List<Image> images) {
-    //    this.images = images;
-    //}
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
 
-    //public List<Image> getImages() {
-    //    return images;
-    //}
+    public List<Image> getImages() {
+        return images;
+    }
 
     public String getName() {
         return name;
