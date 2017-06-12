@@ -33,30 +33,26 @@ th {
 </style>
 </head>
 <body>
-<form:form method="post" modelAttribute="image" action="/SkolniProjectChaty/addUpdateGallery">
+<form:form method="post" modelAttribute="gallery" action="/SkolniProjectChaty/addGallery">
 <table>
 		<tr>
-			<th colspan="5">Update Image: ${image.image_alt}</th>
+			<th colspan="3">Update Gallery ${gallery.name}</th>
 		</tr>
 		<tr>
-		<form:hidden path="id" />
+		<form:hidden path="id_gallery" />
+                <td><form:label path="name">Name:</form:label></td>
+                <td><form:input path="name" size="30" maxlength="30"></form:input></td>
                 </tr>
-		<tr>
-	  <td><form:label path="image_alt">Image_alt:</form:label></td>
-          <td><form:input path="image_alt" size="30" maxlength="30"></form:input>
-          <form:errors path="image_alt" /></td>
-		</tr>
                 <tr>
-	  <td><form:label path="description">Description:</form:label></td>
-          <td><form:textarea path="description"/>
-          <form:errors path="description" /></td>
+                <td><form:label path="description">Description:</form:label></td>
+                <td><form:textarea path="description" /></td>
 		</tr>
+                
 		<tr>
-			<td colspan="5"><input type="submit"
+			<td colspan="3"><input type="submit"
 				class="blue-button" /></td>
 		</tr>
 	</table> 
 </form:form>
-</br>
 </body>
 </html>

@@ -9,6 +9,7 @@ import cz.uhk.fim.kulhama1.skolniprojectchaty.model.Cottage;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,9 +24,7 @@ public class CottageDAO{
     }
     
     public List<Cottage> getAllCottages() {
-        Session session = this.sessionFactory.getCurrentSession();
-        List<Cottage> cottageList = session.createQuery("from Cottage").list();
-        return cottageList;
+        return this.sessionFactory.getCurrentSession().createCriteria(Cottage.class).list();
     }
     
     public Cottage getCottage(int id) {
@@ -44,10 +43,25 @@ public class CottageDAO{
 
     
     public void deleteCottage(int id) {
-		Session session = this.sessionFactory.getCurrentSession();
-		Cottage c = (Cottage) session.load(Cottage.class, new Integer(id));
-		if (null != c) {
-			session.delete(c);
-		}
+		Cottage cottage = (Cottage) sessionFactory.getCurrentSession().load(Cottage.class, id);
+        if (null != cottage) {
+            cottage.setGroup(null);
+            cottage.setGallery(null);
+            this.sessionFactory.getCurrentSession().delete(cottage);
+        }
 	}
+
+    public List<Cottage> getCottagesByRow(String row, String operand , String stringArray) {
+        return this.sessionFactory.getCurrentSession().createCriteria(Cottage.class).add(Restrictions.sqlRestriction(row + " " + operand + " (" + stringArray + ")")).list();  
+    }
+
+    public void updateMultipleCottages(List<Cottage> cottages) {
+        try {
+            for(Cottage cottage : cottages) { 
+                this.sessionFactory.getCurrentSession().update(cottage);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

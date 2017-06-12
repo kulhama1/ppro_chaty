@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "cottage_user")
@@ -17,24 +18,31 @@ public class User{
     int id_user;
     
     @Column
+    @NotNull
     int id_address;
     
     @Column
+    @NotNull
     String login;
     
     @Column
+    @NotNull        
     String name;
     
     @Column 
+    @NotNull        
     String surname;
     
     @Column
+    @NotNull        
     String email;
     
     @Column
+    @NotNull        
     String password;
     
     @Column
+    @NotNull        
     String salt;
     
     @Column
@@ -44,9 +52,11 @@ public class User{
     int phone;
     
     @Column
+    @NotNull        
     int rights;
     
     @Column
+    @NotNull        
     String token;
     
     public User(){

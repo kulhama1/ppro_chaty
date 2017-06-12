@@ -20,12 +20,12 @@ public class Gallery{
     @Id
     @Column(name = "id_gallery")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id_gallery;
+    Integer id_gallery;
     
     @Column
-    int id_thumbnail_gallery;
+    Integer id_thumbnail_gallery;
     
-    @Column
+    @Column   
     String name;
     
     @Column
@@ -36,15 +36,12 @@ public class Gallery{
     @JoinColumn(name="id_gallery")
     private List<Image> images;
     
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="gallery", orphanRemoval = true)
+    private List<Cottage> cottages;
+    
+    
     public Gallery(){
         super();
-    }
-    public Gallery(int id_gallery, int id_thumbnail_gallery, String name, String description){
-        super();
-        this.id_gallery = id_gallery;
-        this.id_thumbnail_gallery = id_thumbnail_gallery;
-        this.name = name;
-        this.description = description;     
     }
 
     public void setDescription(String description) {
@@ -55,13 +52,14 @@ public class Gallery{
         return description;
     }
 
-    public void setId_gallery(int id_gallery) {
+    public void setId_gallery(Integer id_gallery) {
         this.id_gallery = id_gallery;
     }
 
-    public int getId_gallery() {
+    public Integer getId_gallery() {
         return id_gallery;
     }
+
 
     public void setId_thumbnail_gallery(Integer id_thumbnail_gallery) {
         this.id_thumbnail_gallery = id_thumbnail_gallery;
@@ -86,6 +84,15 @@ public class Gallery{
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<Cottage> getCottages() {
+        return cottages;
+    }
+
+    public void setCottages(List<Cottage> cottages) {
+        this.cottages = cottages;
+    }
+    
     
     
 }

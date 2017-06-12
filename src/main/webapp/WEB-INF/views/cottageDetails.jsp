@@ -40,16 +40,20 @@ th {
 		</tr>
 		<tr>
 		<form:hidden path="id_cottage" />
-          <td><form:label path="id_gallery">id_gallery</form:label></td>
-          <td><form:input path="id_gallery" size="30" maxlength="30"></form:input></td>
+          <td><form:label path="form_id_cottage_gallery">cottageGallery</form:label></td>
+          <td><form:select path="form_id_cottage_gallery" items="${cottageGalleries}" /></td>
                 </tr>
 		<tr>
 	  <td><form:label path="form_id_cottage_group">cottageGroup</form:label></td>
           <td><form:select path="form_id_cottage_group" items="${cottageGroups}" /></td>
 		</tr>
                 <tr>
+	  <td><form:label path="name">Name:</form:label></td>
+          <td><form:input path="name" size="30" maxlength="30"></form:input></td>
+		</tr>
+                <tr>
 	  <td><form:label path="description">Description:</form:label></td>
-          <td><form:input path="description" size="30" maxlength="30"></form:input></td>
+                <td><form:textarea path="description"/></td>
 		</tr>
                 <tr>
 	  <td><form:label path="city">city</form:label></td>
@@ -75,8 +79,9 @@ th {
 	<table class="tg">
 	<tr>
 		<th width="80">Id cottage</th>
-		<th width="120">Id gallery</th>
+		<th width="120">Name gallery</th>
 		<th width="120">Skupina</th>
+                <th width="120">Name</th>
                 <th width="120">Description</th>
 		<th width="120">city</th>
 		<th width="120">number_of_place</th>
@@ -84,13 +89,14 @@ th {
 		<th width="60">Edit</th>
 		<th width="60">Delete</th>
 	</tr>
-	<c:forEach items="${listOfCottages}" var="cottage">
+        <c:forEach items="${listOfCottages}" var="cottage">
 		<tr>
 			<td>${cottage.id_cottage}</td>
-			<td>${cottage.id_gallery}</td>
-			<td>${cottage.cottageGroup.name}</td>
+			<td>${cottage.gallery.name}</td>
+			<td>${cottage.group.name}</td>
+                        <td>${cottage.name}</td>
 			<td>${cottage.description}</td>
-                        <td>${cottage.city}</td>
+			<td>${cottage.city}</td>
 			<td>${cottage.number_of_place}</td>
 			<td>${cottage.price}</td>
                         
@@ -98,6 +104,7 @@ th {
 			<td><a href="<c:url value='/deleteCottage/${cottage.id_cottage}' />" >Delete</a></td>
 		</tr>
 	</c:forEach>
+	
 	</table>
 </c:if>
 </body>

@@ -22,7 +22,7 @@ public class Cottage{
     int id_cottage;
     
     @Column
-    int id_gallery;
+    String name;
     
     @Column
     String description;
@@ -35,27 +35,29 @@ public class Cottage{
     
     @Column
     int price;
-    
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
+
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="id_group")
     private Group group;
     
     @Transient
     Integer form_id_cottage_group;
     
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="id_gallery")
+    private Gallery gallery;
+    
+    @Transient
+    Integer form_id_cottage_gallery;
+    
+    @Transient
+    private Image thumbnail;
+    
     public Cottage(){
         super();
         
-    }
-    public Cottage(int id_cottage, int id_gallery, int id_group, String description, String city, int number_of_place, int price, Group group){
-        super();
-        this.id_cottage = id_cottage;
-        this.id_gallery = id_gallery;
-        this.description = description;
-        this.city = city;
-        this.number_of_place = number_of_place;
-        this.price = price;
-        this.group = group;
     }
 
     public void setId_cottage(int id_cottage) {
@@ -64,14 +66,6 @@ public class Cottage{
 
     public int getId_cottage() {
         return id_cottage;
-    }
-
-    public void setId_gallery(int id_gallery) {
-        this.id_gallery = id_gallery;
-    }
-
-    public int getId_gallery() {
-        return id_gallery;
     }
 
     public void setCity(String city) {
@@ -121,6 +115,39 @@ public class Cottage{
     public void setForm_id_cottage_group(Integer form_id_cottage_group) {
         this.form_id_cottage_group = form_id_cottage_group;
     }
+
+    public void setGallery(Gallery gallery) {
+        this.gallery = gallery;
+    }
+
+    public void setThumbnail(Image thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
+    public Gallery getGallery() {
+        return gallery;
+    }
+
+    public Image getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setForm_id_cottage_gallery(Integer form_id_cottage_gallery) {
+        this.form_id_cottage_gallery = form_id_cottage_gallery;
+    }
+
+    public Integer getForm_id_cottage_gallery() {
+        return form_id_cottage_gallery;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
     
 
 }

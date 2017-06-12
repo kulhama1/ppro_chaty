@@ -38,5 +38,15 @@ public class CottageService {
 	public void deleteCottage(int id) {
 		cottageDAO.deleteCottage(id);
 	}
+        
+        @Transactional
+        public List<Cottage> getCottagesByRow(String row, String operand , String stringArray) {
+               return cottageDAO.getCottagesByRow(row, operand, stringArray);
+        }
+        
+        @Transactional
+        public void updateMultipleCottages(List<Cottage> cottages) {
+            cottageDAO.updateMultipleCottages(cottages);
+        }
 }
 

@@ -48,12 +48,11 @@ public class ImageDAO{
 
     
     public void deleteImage(int id) {
-		Session session = this.sessionFactory.getCurrentSession();
-		Image i = (Image) session.load(Image.class, new Integer(id));
-		if (null != i) {
-			session.delete(i);
-		}
-	}
+		Image image = (Image) sessionFactory.getCurrentSession().load(Image.class, id);
+        if (null != image) {
+            this.sessionFactory.getCurrentSession().delete(image);
+        }   
+    }
 
     public List<Image> getImagesByRow(String row, String operand , String stringArray) {
         return this.sessionFactory.getCurrentSession().createCriteria(Image.class).add(Restrictions.sqlRestriction(row + " " + operand + " " + stringArray)).list();  

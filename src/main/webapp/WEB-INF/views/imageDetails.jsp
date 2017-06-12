@@ -50,7 +50,7 @@ th {
 		</tr>
                 <tr>
 	  <td><form:label path="description">Description:</form:label></td>
-          <td><form:input path="description" size="30" maxlength="30"></form:input>
+          <td><form:textarea path="description"/>
           <form:errors path="description" /></td>
 		</tr>
 		<tr>

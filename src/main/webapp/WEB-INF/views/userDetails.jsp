@@ -41,11 +41,13 @@ th {
 		<tr>
 		<form:hidden path="id_user" />
           <td><form:label path="id_address">id_address:</form:label></td>
-          <td><form:input path="id_address" size="30" maxlength="30"></form:input></td>
+          <td><form:input path="id_address" size="30" maxlength="30"></form:input>
+          <form:errors path="id_address" /></td>
                 </tr>
 		<tr>
 	  <td><form:label path="login">Login</form:label></td>
-          <td><form:input path="login" size="30" maxlength="30"></form:input></td>
+          <td><form:input path="login" size="30" maxlength="30"></form:input>
+          <form:errors path="login" /></td>
 		</tr>
                 <tr>
 	  <td><form:label path="name">Name</form:label></td>

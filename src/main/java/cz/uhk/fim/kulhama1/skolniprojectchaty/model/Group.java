@@ -25,6 +25,9 @@ public class Group{
     @Column
     String description;
     
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="group", orphanRemoval = true)
+    private List<Cottage> cottages;
+    
     public Group(){
         super();
         
@@ -59,5 +62,15 @@ public class Group{
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public void setCottages(List<Cottage> cottages) {
+        this.cottages = cottages;
+    }
+
+    public List<Cottage> getCottages() {
+        return cottages;
+    }
+
+    
     
 }

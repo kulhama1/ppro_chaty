@@ -41,22 +41,25 @@ th {
 		<tr>
 		<form:hidden path="id_gallery" />
                 <td><form:label path="name">Name:</form:label></td>
-                <td><form:input path="name" size="30" maxlength="30"></form:input></td>
+                <td><form:input path="name"/>
+                    <form:errors path="name" /></td>
                 </tr>
                 <tr>
           <td><form:label path="description">Description:</form:label></td>
-          <td><form:input path="description" size="30" maxlength="30"></form:input></td>
+                <td><form:textarea path="description" />
+                    <form:errors path="description" /></td>
 		</tr>
                 <tr>
           <td><form:label path="images">Images</form:label></td> 
-          <td><form:checkboxes path="images" items="${images}" itemLabel="image_alt" itemValue="id"/></td>         
+          <td><form:checkboxes path="images" items="${images}" itemLabel="image_alt" itemValue="id"/>
+              <form:errors path="images" /></td>         
                 </tr>
                 <tr>
           <td><form:label path="id_thumbnail_gallery">Id_thumbnail_gallery:</form:label></td>
           <td><form:select path="id_thumbnail_gallery">
                         <form:option value="-1" label="--- Select ---"/>
-                    </form:select></td>
-
+                    </form:select>
+                    <form:errors path="id_thumbnail_gallery" /></td>
 		</tr>
 		<tr>
 			<td colspan="3"><input type="submit"

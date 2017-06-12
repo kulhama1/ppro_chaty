@@ -19,34 +19,27 @@ public class GalleryDAO{
     }
     
     public List<Gallery> getAllGalleries() {
-        Session session = this.sessionFactory.getCurrentSession();
-        List<Gallery> galleryList = session.createQuery("from Gallery").list();
-        return galleryList;
+        return this.sessionFactory.getCurrentSession().createCriteria(Gallery.class).list();
     }
     
     public Gallery getGallery(int id) {
-		Session session = this.sessionFactory.getCurrentSession();
-		Gallery gallery = (Gallery) session.get(Gallery.class, new Integer(id));
-		return gallery;
+		 return (Gallery) sessionFactory.getCurrentSession().get(Gallery.class, id);
 	}
-    public Gallery addGallery(Gallery gallery) {
-		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(gallery);
-		return gallery;
+    public void addGallery(Gallery gallery) {
+		this.sessionFactory.getCurrentSession().save(gallery);
 	}
 
     public void updateGallery(Gallery gallery) {
-		Session session = this.sessionFactory.getCurrentSession();
-		session.update(gallery);
+		this.sessionFactory.getCurrentSession().update(gallery);
 	}
 
     
-    public void deleteGallery(int id) {
-		Session session = this.sessionFactory.getCurrentSession();
-		Gallery g = (Gallery) session.load(Gallery.class, new Integer(id));
-		if (null != g) {
-			session.delete(g);
-		}
+    public void deleteGallery(Integer id) {
+		Gallery gallery = (Gallery) sessionFactory.getCurrentSession().load(Gallery.class, id);
+                if (null != gallery) {
+                    gallery.setImages(null);
+                    this.sessionFactory.getCurrentSession().delete(gallery);
+                }
 	}
     
 }

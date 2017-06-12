@@ -51,23 +51,28 @@ public class GalleryController {
 
 	@RequestMapping(value = "/addGallery", method = RequestMethod.POST, headers = "Accept=application/json")
 	public String addGallery(@ModelAttribute("gallery") Gallery gallery) {	
-		if(gallery.getId_gallery()==0)
-		{
-			galleryService.addGallery(gallery);
-		}
-		else
-		{	
-			galleryService.updateGallery(gallery);
-		}
 		
+			galleryService.addGallery(gallery);
 		return "redirect:/getAllGalleries";
 	}
 
 	@RequestMapping(value = "/updateGallery/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
-	public String updateGallery(@PathVariable("id") int id,Model model) {
-		 model.addAttribute("gallery", this.galleryService.getGallery(id));
-	        model.addAttribute("listOfGalleries", this.galleryService.getAllGalleries());
-	        return "galleryDetails";
+	public String updateGallery(@PathVariable("id") int id, Model model) {
+            
+            try {    
+            images = imageService.getImagesByRow("id_gallery", "is", "NULL");
+                     
+                Gallery gallery = galleryService.getGallery(id);
+                //images.addAll(gallery.getImages());
+                this.getImagesMap();
+                
+		model.addAttribute("gallery", this.galleryService.getGallery(id));
+                model.addAttribute("images", images);
+	        return "galleryDetailsUpdate";
+            } catch(Exception e) {
+            e.printStackTrace();
+        }
+             return "redirect:/gettAllGalleries";
 	}
 
 	@RequestMapping(value = "/deleteGallery/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
@@ -80,7 +85,7 @@ public class GalleryController {
     private Map<String, Image> getImagesMap() {        
         imageMap = new LinkedHashMap<String, Image>();
         for(Image img : images) {
-            imageMap.put(Integer.toString(img.getId()), img);
+            imageMap.put((img.getId().toString()), img);
         } 
         return imageMap;
     }

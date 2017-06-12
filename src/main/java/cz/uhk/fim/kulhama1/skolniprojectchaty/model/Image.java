@@ -36,16 +36,6 @@ public class Image{
         super();
     }
 
-    public Image(int id, String image_alt, String image_src, String description, String thumbnail_src, int id_gallery){
-        super();
-        this.id = id;
-        this.image_alt = image_alt;
-        this.image_src = image_src;
-        this.description = description;
-        this.thumbnail_src = thumbnail_src;
-        this.id_gallery = id_gallery;
-    }
-
     public String getDescription() {
         return description;
     }
