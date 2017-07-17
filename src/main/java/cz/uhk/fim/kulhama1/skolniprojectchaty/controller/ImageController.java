@@ -117,36 +117,10 @@ public class ImageController {
 		
 		return "redirect:/getAllImages";
     }
-
-	//@RequestMapping(value = "/detailImage", method = RequestMethod.GET, headers = "Accept=application/json")
-        //public String detailImage(Model model, @RequestParam(value = "image", required = false, defaultValue = "-1") final String imageId) {
-        /* Convert in RequestParam is returning error 400 - better this way */
-        //try {
-        //    Integer imagId = Integer.parseInt(imageId);               
-        //    Image image = imageService.getImagesById(imagId);
-
-            /* Maybe some better solution? */
-        //    if(imagId.equals(image.getId())) {
-        //        model.addAttribute("image", image);
-        //        return "imageDetailsUpdate";
-        //    } else { 
-        //        return "redirect:getAllImages";
-        //    }
-        //} catch(Exception e) {
-        //    e.printStackTrace();
-        //    return "redirect:getAllImages";
-        //}
-   // }
-       // @RequestMapping(value = "/detailImage/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
-       // public String detailImage(@PathVariable("id") int id,Model model) {
-        //	 model.addAttribute("image", this.imageService.getImage(id));
-	//         return "imageDetailsUpdate";
-	// }
         
         @RequestMapping(value = "/updateImage/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
 	public String updateImage(@PathVariable("id") int id, Model model) {
                 model.addAttribute("image", this.imageService.getImage(id));
-	        //model.addAttribute("listOfGroups", this.imageService.getAllImages());
                 return "imageDetailsUpdate";
 	}
 

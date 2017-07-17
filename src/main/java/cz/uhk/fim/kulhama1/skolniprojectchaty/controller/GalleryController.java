@@ -59,20 +59,16 @@ public class GalleryController {
 	@RequestMapping(value = "/updateGallery/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
 	public String updateGallery(@PathVariable("id") int id, Model model) {
             
-            try {    
             images = imageService.getImagesByRow("id_gallery", "is", "NULL");
                      
                 Gallery gallery = galleryService.getGallery(id);
                 //images.addAll(gallery.getImages());
                 this.getImagesMap();
                 
-		model.addAttribute("gallery", this.galleryService.getGallery(id));
+		model.addAttribute("gallery", gallery);
                 model.addAttribute("images", images);
 	        return "galleryDetailsUpdate";
-            } catch(Exception e) {
-            e.printStackTrace();
-        }
-             return "redirect:/gettAllGalleries";
+           
 	}
 
 	@RequestMapping(value = "/deleteGallery/{id}", method = RequestMethod.GET, headers = "Accept=application/json")

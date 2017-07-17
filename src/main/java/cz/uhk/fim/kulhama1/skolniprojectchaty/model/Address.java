@@ -14,7 +14,7 @@ public class Address{
     @Id
     @Column(name = "id_address")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id_address;
+    private Integer id_address;
     
     @Column
     String address;
@@ -23,13 +23,13 @@ public class Address{
     String city;
     
     @Column
-    int postal_code;
+    String postal_code;
     
     public Address(){
         super();
         
     }
-    public Address(int id_address, String address, String city, int postal_code){
+    public Address(Integer id_address, String address, String city, String postal_code){
         super();
         this.id_address = id_address;
         this.address = address;
@@ -37,11 +37,11 @@ public class Address{
         this.postal_code = postal_code;
     }
 
-    public int getId_address() {
+    public Integer getId_address() {
         return id_address;
     }
 
-    public void setId_address(int id_address) {
+    public void setId_address(Integer id_address) {
         this.id_address = id_address;
     }
 
@@ -61,11 +61,11 @@ public class Address{
         this.city = city;
     }
 
-    public int getPostal_code() {
+    public String getPostal_code() {
         return postal_code;
     }
 
-    public void setPostal_code(int postal_code) {
+    public void setPostal_code(String postal_code) {
         this.postal_code = postal_code;
     }
     
