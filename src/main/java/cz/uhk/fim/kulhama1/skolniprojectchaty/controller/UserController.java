@@ -39,7 +39,7 @@ public class UserController {
             UserAccount userAccount = new UserAccount(new User(), new Address());
             model.addAttribute("userAccount", userAccount);
             model.addAttribute("listOfUsers", listOfUsers);
-            return "userDetails";
+            return "/administrace/userDetails";
 
 	}
 
@@ -83,7 +83,7 @@ public class UserController {
             if(result.hasErrors()) { 
                 logger.error(result.getAllErrors());
                 model.addAttribute("userAccount", userAccount);
-                return "userDetails";
+                return "/administrace/userDetails";
             }
             
             /* Saves address and user */
@@ -112,7 +112,7 @@ public class UserController {
                 userAccount.setAddress(address);
                 
                 model.addAttribute("userAccount", userAccount);
-                return "userDetailsUpdate";
+                return "/administrace/userDetailsUpdate";
 	}
         
         @RequestMapping(value = "/addUpdateUser", method = RequestMethod.POST, headers = "Accept=application/json")
@@ -147,7 +147,7 @@ public class UserController {
             if(result.hasErrors()) { 
                 logger.error(result.getAllErrors());
                 model.addAttribute("userAccount", userAccount);
-                return "userDetailsUpdate";
+                return "/administrace/userDetailsUpdate";
             }
             
             /* Saves address and user */

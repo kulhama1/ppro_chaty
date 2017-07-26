@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "cottage_group")
@@ -20,9 +21,11 @@ public class Group{
     int id_group;
     
     @Column
+    @NotEmpty
     String name;
     
     @Column
+    @NotEmpty
     String description;
     
     @OneToMany(cascade=CascadeType.ALL, mappedBy="group", orphanRemoval = true)

@@ -1,11 +1,14 @@
 package cz.uhk.fim.kulhama1.skolniprojectchaty.model;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "cottage_address")
@@ -17,24 +20,19 @@ public class Address{
     private Integer id_address;
     
     @Column
+    @NotEmpty
     String address;
     
     @Column
+    @NotEmpty
     String city;
     
     @Column
+    @NotEmpty
     String postal_code;
     
     public Address(){
-        super();
         
-    }
-    public Address(Integer id_address, String address, String city, String postal_code){
-        super();
-        this.id_address = id_address;
-        this.address = address;
-        this.city = city;
-        this.postal_code = postal_code;
     }
 
     public Integer getId_address() {
@@ -68,6 +66,5 @@ public class Address{
     public void setPostal_code(String postal_code) {
         this.postal_code = postal_code;
     }
-    
-    
+       
 }

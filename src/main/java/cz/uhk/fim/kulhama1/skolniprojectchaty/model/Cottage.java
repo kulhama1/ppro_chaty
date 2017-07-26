@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "cottage_cottage")
@@ -22,6 +23,7 @@ public class Cottage{
     int id_cottage;
     
     @Column
+    @NotEmpty
     String name;
     
     @Column

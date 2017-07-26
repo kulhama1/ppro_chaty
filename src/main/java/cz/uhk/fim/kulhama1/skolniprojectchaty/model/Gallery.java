@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 @Entity
@@ -24,9 +25,11 @@ public class Gallery{
     Integer id_gallery;
     
     @Column
+    @NotEmpty
     Integer id_thumbnail_gallery;
     
-    @Column   
+    @Column
+    @NotEmpty
     String name;
     
     @Column

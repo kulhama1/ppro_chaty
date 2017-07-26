@@ -47,7 +47,7 @@ public class ImageController {
 		List<Image> listOfImages = imageService.getAllImages();
 		model.addAttribute("image", new Image());
 		model.addAttribute("listOfImages", listOfImages);
-		return "imageDetails";
+		return "/administrace/imageDetails";
 	}
 
 	@RequestMapping(value = "/getImage/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
@@ -121,7 +121,7 @@ public class ImageController {
         @RequestMapping(value = "/updateImage/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
 	public String updateImage(@PathVariable("id") int id, Model model) {
                 model.addAttribute("image", this.imageService.getImage(id));
-                return "imageDetailsUpdate";
+                return "/administrace/imageDetailsUpdate";
 	}
 
 	@RequestMapping(value = "/deleteImage/{id}", method = RequestMethod.GET, headers = "Accept=application/json")

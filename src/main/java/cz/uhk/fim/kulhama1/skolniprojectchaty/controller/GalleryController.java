@@ -41,7 +41,7 @@ public class GalleryController {
 		model.addAttribute("gallery", new Gallery());
 		model.addAttribute("listOfGalleries", listOfGalleries);
                 model.addAttribute("images", images);
-		return "galleryDetails";
+		return "/administrace/galleryDetails";
 	}
 
 	@RequestMapping(value = "/getGallery/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
@@ -67,7 +67,7 @@ public class GalleryController {
                 
 		model.addAttribute("gallery", gallery);
                 model.addAttribute("images", images);
-	        return "galleryDetailsUpdate";
+	        return "/administrace/galleryDetailsUpdate";
            
 	}
 

@@ -35,7 +35,7 @@ public class CottageController {
 		model.addAttribute("listOfCottages", listOfCottages);
                 model.addAttribute("cottageGroups", this.getCottageGroupNames());
                 model.addAttribute("cottageGalleries", this.getCottageGalleriesNames());
-		return "cottageDetails";
+		return "/administrace/cottageDetails";
 	}
 
 	@RequestMapping(value = "/getCottage/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
@@ -77,7 +77,7 @@ public class CottageController {
                  model.addAttribute("cottageGroups", this.getCottageGroupNames());
                  model.addAttribute("cottageGalleries", this.getCottageGalleriesNames());
 	         model.addAttribute("listOfCottages", this.cottageService.getAllCottages());
-	         return "cottageDetails";
+	         return "/administrace/cottageDetails";
 	}
 
 	@RequestMapping(value = "/deleteCottage/{id}", method = RequestMethod.GET, headers = "Accept=application/json")

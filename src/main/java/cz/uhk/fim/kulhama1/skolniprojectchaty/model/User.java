@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "cottage_user")
@@ -27,27 +28,27 @@ public class User{
     Integer id_address;
     
     @Column
-    @NotNull
+    @NotEmpty
     String login;
     
     @Column
-    @NotNull        
+    @NotEmpty       
     String name;
     
     @Column 
-    @NotNull        
+    @NotEmpty      
     String surname;
     
     @Column
-    @NotNull        
+    @NotEmpty       
     String email;
     
     @Column
-    @NotNull        
+    @NotEmpty 
     String password;
     
     @Column
-    @NotNull        
+    @NotEmpty        
     String salt;
     
     @Column
@@ -57,11 +58,11 @@ public class User{
     int phone;
     
     @Column
-    @NotNull        
+    @NotEmpty        
     int rights;
     
     @Column
-    @NotNull        
+    @NotEmpty        
     String token;
     
     @Transient

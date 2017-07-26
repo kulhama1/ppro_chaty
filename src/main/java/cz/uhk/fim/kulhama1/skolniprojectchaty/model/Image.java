@@ -1,16 +1,12 @@
 package cz.uhk.fim.kulhama1.skolniprojectchaty.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "cottage_image")
@@ -22,18 +18,22 @@ public class Image{
     Integer id;
     
     @Column
+    @NotEmpty
     String image_alt;
     
     @Column
+    @NotEmpty
     String image_src;
     
     @Column
     String description;
     
     @Column
+    @NotEmpty
     String thumbnail_src;
     
     @Column
+    @NotEmpty
     Integer id_gallery;
     
     public Image(){
