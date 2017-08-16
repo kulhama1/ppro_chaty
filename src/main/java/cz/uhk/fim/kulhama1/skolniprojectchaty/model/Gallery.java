@@ -36,7 +36,7 @@ public class Gallery{
     String description;
     
     @JsonIgnore
-    @OneToMany(fetch=FetchType.EAGER)
+    @OneToMany(fetch =FetchType.EAGER)
     @JoinColumn(name="id_gallery")
     private List<Image> images;
     

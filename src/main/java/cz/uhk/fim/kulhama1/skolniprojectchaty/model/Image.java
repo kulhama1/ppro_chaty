@@ -33,7 +33,6 @@ public class Image{
     String thumbnail_src;
     
     @Column
-    @NotEmpty
     Integer id_gallery;
     
     public Image(){

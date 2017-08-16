@@ -74,7 +74,7 @@ th {
         </ul>
         <div style="margin-left:15%;padding:1px 16px;height:1000px;">
         <h2>Obrázky</h2>
-<form:form method="post" modelAttribute="image" action="/SkolniProjectChaty/addUpdateGallery">
+<form:form method="post" modelAttribute="image" action="/SkolniProjectChaty/addUpdateImage">
 <table>
 		<tr>
 			<th colspan="5">Update Image: ${image.image_alt}</th>
@@ -88,10 +88,19 @@ th {
           <form:errors path="image_alt" /></td>
 		</tr>
                 <tr>
+		<form:hidden path="image_src" />
+                </tr>
+                <tr>
 	  <td><form:label path="description">Description:</form:label></td>
           <td><form:textarea path="description"/>
           <form:errors path="description" /></td>
 		</tr>
+                <tr>
+		<form:hidden path="thumbnail_src" />
+                </tr>
+                <tr>
+		<form:hidden path="id_gallery" />
+                </tr>
 		<tr>
 			<td colspan="5"><input type="submit"
 				class="blue-button" /></td>

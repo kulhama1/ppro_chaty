@@ -74,7 +74,7 @@ th {
         </ul>
         <div style="margin-left:15%;padding:1px 16px;height:1000px;">
         <h2>Galerie</h2>
-<form:form method="post" modelAttribute="gallery" action="/SkolniProjectChaty/addGallery">
+<form:form method="post" modelAttribute="gallery" action="/SkolniProjectChaty/addUpdateGallery">
 <table>
 		<tr>
 			<th colspan="3">Update Gallery ${gallery.name}</th>
@@ -91,13 +91,13 @@ th {
                     <form:errors path="description" /></td></td>
 		</tr>
                 <tr>
-                    <form:label path="images">images</form:label>
-                    <form:checkboxes path="images" items="${gallery.images}" itemLabel="image_alt" itemValue="id"/>
+                    <td><form:label path="images">images</form:label></td>
+                    <td><form:checkboxes path="images" items="${gallery.images}" itemLabel="image_alt" itemValue="id"/>
                     <form:errors path="images" /></td>
                 </tr>
                 <tr>
-                    <form:label path="id_thumbnail_gallery">id_thumbnail</form:label>
-                    <form:select path="id_thumbnail_gallery">
+                    <td><form:label path="id_thumbnail_gallery">id_thumbnail</form:label></td>
+                    <td><form:select path="id_thumbnail_gallery">
                         <form:option value="-1" label="--- Select ---"/>
                         <form:options items="${gallery.images}" itemLabel="image_alt" itemValue="id" />
                      </form:select>

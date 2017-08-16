@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 16.8.2017, 17:14:22
+    Document   : chata_detail
+    Created on : 16.8.2017, 17:15:40
     Author     : Martin
 --%>
 
@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Index</h1>
+        <h1>Chata Detail</h1>
     </body>
 </html>

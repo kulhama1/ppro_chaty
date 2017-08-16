@@ -45,27 +45,34 @@ public class GalleryController {
 	}
 
 	@RequestMapping(value = "/getGallery/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
-	public Gallery getGalleryById(@PathVariable int id) {
+	public Gallery getGalleryById(Model model, @PathVariable int id) {
+                
 		return galleryService.getGallery(id);
 	}
 
 	@RequestMapping(value = "/addGallery", method = RequestMethod.POST, headers = "Accept=application/json")
 	public String addGallery(@ModelAttribute("gallery") Gallery gallery) {	
-		
 			galleryService.addGallery(gallery);
 		return "redirect:/getAllGalleries";
 	}
+        
+        @RequestMapping(value = "/addUpdateGallery", method = RequestMethod.POST, headers = "Accept=application/json")
+	public String addUpdateGallery(@ModelAttribute("gallery") Gallery gallery) {
+            galleryService.updateGallery(gallery);
+            return "redirect:/getAllGalleries";
+                
+	}
+        
 
 	@RequestMapping(value = "/updateGallery/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
 	public String updateGallery(@PathVariable("id") int id, Model model) {
             
-            images = imageService.getImagesByRow("id_gallery", "is", "NULL");
-                     
                 Gallery gallery = galleryService.getGallery(id);
-                //images.addAll(gallery.getImages());
+                images = imageService.getImagesByRow("id_gallery", "is", "NULL");
+                images.addAll(gallery.getImages());
                 this.getImagesMap();
                 
-		model.addAttribute("gallery", gallery);
+                model.addAttribute("gallery", gallery);
                 model.addAttribute("images", images);
 	        return "/administrace/galleryDetailsUpdate";
            
