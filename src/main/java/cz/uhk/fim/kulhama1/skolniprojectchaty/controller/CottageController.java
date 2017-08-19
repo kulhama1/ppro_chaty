@@ -9,9 +9,12 @@ import cz.uhk.fim.kulhama1.skolniprojectchaty.service.GroupService;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import javax.validation.Valid;
+import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +29,9 @@ public class CottageController {
                GroupService groupService;
         @Autowired
                GalleryService galleryService;
+        
+        
+        private static final org.jboss.logging.Logger logger = LoggerFactory.logger(CottageController.class);
 	
 	@RequestMapping(value = "/getAllCottages", method = RequestMethod.GET, headers = "Accept=application/json")
 	public String getCottages(Model model) {
@@ -44,7 +50,7 @@ public class CottageController {
 	}
 
 	@RequestMapping(value = "/addCottage", method = RequestMethod.POST, headers = "Accept=application/json")
-	public String addCottage(@ModelAttribute("cottage") Cottage cottage) {	
+	public String addCottage(Model model, @ModelAttribute("cottage") Cottage cottage, BindingResult result) {	
                 Integer cottageGroupId = cottage.getForm_id_cottage_group();
                 Integer cottageGalleryId = cottage.getForm_id_cottage_gallery();
                 cottage.setGroup(groupService.getGroupById(cottageGroupId));
@@ -52,6 +58,17 @@ public class CottageController {
             
 		if(cottage.getId_cottage()==0)
 		{
+                    //  if(result.hasErrors()) { 
+                   // logger.error(result.getAllErrors());   
+                   // List<Cottage> listOfCottages = cottageService.getAllCottages();
+		
+                   // model.addAttribute("cottage", new Cottage());
+                   // model.addAttribute("listOfCottages", listOfCottages);
+                   // model.addAttribute("cottageGroups", this.getCottageGroupNames());
+                   // model.addAttribute("cottageGalleries", this.getCottageGalleriesNames());
+		//return "/administrace/cottageDetails";
+           // }
+                    
 			cottageService.addCottage(cottage);
 		}
 		else

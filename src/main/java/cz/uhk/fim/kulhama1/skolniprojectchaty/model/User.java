@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -40,7 +41,8 @@ public class User{
     String surname;
     
     @Column
-    @NotEmpty       
+    @NotEmpty
+    @Email
     String email;
     
     @Column
@@ -58,11 +60,8 @@ public class User{
     int phone;
     
     @Column
-    @NotEmpty        
-    int rights;
-    
-    @Column
-    @NotEmpty        
+    @NotNull        
+    Integer rights;      
     String token;
     
     @Transient
@@ -175,7 +174,7 @@ public class User{
         this.phone = phone;
     }
 
-    public void setRights(int rights) {
+    public void setRights(Integer rights) {
         this.rights = rights;
     }
 
@@ -223,7 +222,7 @@ public class User{
         return phone;
     }
 
-    public int getRights() {
+    public Integer getRights() {
         return rights;
     }
 

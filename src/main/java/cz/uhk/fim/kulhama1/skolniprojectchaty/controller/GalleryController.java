@@ -8,9 +8,11 @@ import java.beans.PropertyEditorSupport;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -51,9 +53,20 @@ public class GalleryController {
 	}
 
 	@RequestMapping(value = "/addGallery", method = RequestMethod.POST, headers = "Accept=application/json")
-	public String addGallery(@ModelAttribute("gallery") Gallery gallery) {	
-			galleryService.addGallery(gallery);
-		return "redirect:/getAllGalleries";
+	public String addGallery(Model model, @Valid @ModelAttribute("gallery") Gallery gallery, BindingResult result) {	
+            try { 
+            /* Return with errors */
+            if(result.hasErrors()) { 
+                //logger.error(result.getAllErrors());   
+                model.addAttribute("gallery", gallery);
+                return "administrace/galleryDetails";
+            }
+
+            galleryService.addGallery(gallery);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+	return "redirect:/getAllGalleries";
 	}
         
         @RequestMapping(value = "/addUpdateGallery", method = RequestMethod.POST, headers = "Accept=application/json")

@@ -42,4 +42,9 @@ public class GroupService {
 	public void deleteGroup(int id) {
 		groupDAO.deleteGroup(id);
 	}
+        
+        @Transactional
+        public List<Group> getGroupsByRow(String row, String operand , String stringArray){
+            return groupDAO.getGroupsByRow(row, operand, stringArray);
+        }
 }

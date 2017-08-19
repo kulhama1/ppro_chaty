@@ -1,5 +1,7 @@
 package cz.uhk.fim.kulhama1.skolniprojectchaty.controller;
 
+import cz.uhk.fim.kulhama1.skolniprojectchaty.model.Cottage;
+import cz.uhk.fim.kulhama1.skolniprojectchaty.model.Group;
 import cz.uhk.fim.kulhama1.skolniprojectchaty.model.Image;
 import cz.uhk.fim.kulhama1.skolniprojectchaty.service.ImageService;
 import java.awt.Graphics2D;
@@ -26,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
 @Controller
 public class ImageController {
@@ -35,8 +38,7 @@ public class ImageController {
         ImageIcon i;
         
         private static final org.jboss.logging.Logger logger = LoggerFactory.logger(ImageController.class);
-       
-
+        
     public ImageController() {
         
     }
@@ -63,7 +65,7 @@ public class ImageController {
 	}
 
 	@RequestMapping(value = "/addImage", method = RequestMethod.POST, headers = "Accept=application/json")
-	public String add_image(Model model, @RequestParam("file") MultipartFile file, @ModelAttribute("image")Image image, HttpServletRequest request, BindingResult result) throws IOException {
+	public String add_image(Model model, @Valid @RequestParam("file") MultipartFile file, @ModelAttribute("image")Image image, HttpServletRequest request, BindingResult result) throws IOException {
 			i = new ImageIcon(file.getOriginalFilename());
         ServletContext context = request.getServletContext();
         String rootPath = context.getRealPath("/");
@@ -73,6 +75,7 @@ public class ImageController {
 
                 // Create the file on server
                 File serverFile = new File(rootPath+ "uploads/" +i);
+                System.out.println(rootPath);
                 BufferedOutputStream stream = new BufferedOutputStream(
                         new FileOutputStream(serverFile));
                 stream.write(bytes);

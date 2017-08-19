@@ -4,6 +4,7 @@ import cz.uhk.fim.kulhama1.skolniprojectchaty.model.Group;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -50,6 +51,9 @@ public class GroupDAO{
         public Group getGroupById(int id) {
                 Session session = this.sessionFactory.getCurrentSession();
 		return (Group) session.get(Group.class, id);
+    }
+         public List<Group> getGroupsByRow(String row, String operand , String stringArray) {
+        return this.sessionFactory.getCurrentSession().createCriteria(Group.class).add(Restrictions.sqlRestriction(row + " " + operand + " " + stringArray)).list();  
     }
     
 }

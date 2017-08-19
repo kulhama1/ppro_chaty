@@ -30,12 +30,15 @@ public class Cottage{
     String description;
     
     @Column
+    @NotEmpty
     String city;
     
     @Column
+    //@NotEmpty        
     int number_of_place;
     
     @Column
+    //@NotEmpty        
     int price;
 
     @JsonIgnore

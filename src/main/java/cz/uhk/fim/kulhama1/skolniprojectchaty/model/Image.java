@@ -18,7 +18,6 @@ public class Image{
     Integer id;
     
     @Column
-    @NotEmpty
     String image_alt;
     
     @Column
@@ -29,7 +28,6 @@ public class Image{
     String description;
     
     @Column
-    @NotEmpty
     String thumbnail_src;
     
     @Column

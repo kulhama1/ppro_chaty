@@ -26,14 +26,13 @@ public class Gallery{
     
     @Column
     @NotEmpty
-    Integer id_thumbnail_gallery;
-    
-    @Column
-    @NotEmpty
     String name;
     
     @Column
     String description;
+    
+    @Column
+    Integer id_thumbnail_gallery;
     
     @JsonIgnore
     @OneToMany(fetch =FetchType.EAGER)
