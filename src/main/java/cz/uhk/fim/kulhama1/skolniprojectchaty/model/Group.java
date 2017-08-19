@@ -25,7 +25,6 @@ public class Group{
     String name;
     
     @Column
-    @NotEmpty
     String description;
     
     @OneToMany(cascade=CascadeType.ALL, mappedBy="group", orphanRemoval = true)

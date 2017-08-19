@@ -12,6 +12,7 @@ import cz.uhk.fim.kulhama1.skolniprojectchaty.model.Image;
 import cz.uhk.fim.kulhama1.skolniprojectchaty.service.CottageService;
 import cz.uhk.fim.kulhama1.skolniprojectchaty.service.GroupService;
 import cz.uhk.fim.kulhama1.skolniprojectchaty.service.ImageService;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.hibernate.Hibernate;
@@ -103,20 +104,27 @@ public class AdminController {
     public String filtr(@PathVariable("id") int id,Model model){
         cottages = null;
         groups = groupService.getAllGroups();
-        cottages = cottageService.getCottagesByRow("id_group", "is", "NULL");
+        List<Cottage> cottages1 = cottageService.getAllCottages();
+        List<Cottage> cottagesFilter = new ArrayList<Cottage>();
         
-        for( Cottage c : cottages ) {
+        for( Cottage c : cottages1 ) {
+            Hibernate.initialize(c.getGroup());
             Hibernate.initialize(c.getGallery());
             Hibernate.initialize(c.getGroup());
-             Gallery gal = c.getGallery();
+            Group group = c.getGroup();
+            int id_group = group.getId_group();
+            if (id == id_group){
+                cottagesFilter.add(c);
+            Gallery gal = c.getGallery();
             if( gal != null ) {
                 Integer id_thumbnail_gallery = gal.getId_thumbnail_gallery();
                 c.setThumbnail(imageService.getImagesById(id_thumbnail_gallery));
             }
+            }
+            
         }
-
         model.addAttribute("groups", groups);
-        model.addAttribute("cottages", cottages);
+        model.addAttribute("cottages", cottagesFilter);
         return "index";
     }
     

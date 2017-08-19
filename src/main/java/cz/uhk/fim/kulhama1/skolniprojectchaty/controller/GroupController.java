@@ -55,10 +55,22 @@ public class GroupController {
         }
 		}
 		else
-		{	
-			groupService.updateGroup(group);
-		}
-		
+		{
+                    try {
+            /* Return with errors */
+            if(result.hasErrors()) { 
+                logger.error(result.getAllErrors());   
+                List<Group> listOfGroups = groupService.getAllGroups();
+        
+                model.addAttribute("group", group);
+                model.addAttribute("listOfGroups", listOfGroups);
+                return "/administrace/groupDetails";
+            }
+                groupService.updateGroup(group);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }	
+                }
 		return "redirect:/getAllGroups";
 	}
 

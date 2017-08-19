@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
+import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +33,8 @@ public class GalleryController {
         
                List<Image> images;
                Map<String, Image> imageMap;
+               
+         private static final org.jboss.logging.Logger logger = LoggerFactory.logger(GalleryController.class);       
 	
 	@RequestMapping(value = "/getAllGalleries", method = RequestMethod.GET, headers = "Accept=application/json")
 	public String getGalleries(Model model) {
@@ -57,7 +60,7 @@ public class GalleryController {
             try { 
             /* Return with errors */
             if(result.hasErrors()) { 
-                //logger.error(result.getAllErrors());   
+                logger.error(result.getAllErrors());   
                 model.addAttribute("gallery", gallery);
                 return "administrace/galleryDetails";
             }
