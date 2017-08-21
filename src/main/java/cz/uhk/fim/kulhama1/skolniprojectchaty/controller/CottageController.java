@@ -50,29 +50,41 @@ public class CottageController {
 	}
 
 	@RequestMapping(value = "/addCottage", method = RequestMethod.POST, headers = "Accept=application/json")
-	public String addCottage(Model model, @ModelAttribute("cottage") Cottage cottage, BindingResult result) {	
-                Integer cottageGroupId = cottage.getForm_id_cottage_group();
-                Integer cottageGalleryId = cottage.getForm_id_cottage_gallery();
-                cottage.setGroup(groupService.getGroupById(cottageGroupId));
-                cottage.setGallery(galleryService.getGallery(cottageGalleryId));
-            
-		if(cottage.getId_cottage()==0)
+	public String addCottage(Model model, @Valid @ModelAttribute("cottage") Cottage cottage, BindingResult result) {	
+                    Integer cottageGroupId = cottage.getForm_id_cottage_group();
+                    Integer cottageGalleryId = cottage.getForm_id_cottage_gallery();
+                    cottage.setGroup(groupService.getGroupById(cottageGroupId));
+                    cottage.setGallery(galleryService.getGallery(cottageGalleryId));
+            if(cottage.getId_cottage()==0)
 		{
-                    //  if(result.hasErrors()) { 
-                   // logger.error(result.getAllErrors());   
-                   // List<Cottage> listOfCottages = cottageService.getAllCottages();
-		
-                   // model.addAttribute("cottage", new Cottage());
-                   // model.addAttribute("listOfCottages", listOfCottages);
-                   // model.addAttribute("cottageGroups", this.getCottageGroupNames());
-                   // model.addAttribute("cottageGalleries", this.getCottageGalleriesNames());
-		//return "/administrace/cottageDetails";
-           // }
+                    if(result.hasErrors()) { 
+                    logger.error(result.getAllErrors());   
                     
+                    List<Cottage> listOfCottages = cottageService.getAllCottages();
+		
+                    model.addAttribute("cottage", cottage);
+                    model.addAttribute("listOfCottages", listOfCottages);
+                    model.addAttribute("cottageGroups", this.getCottageGroupNames());
+                    model.addAttribute("cottageGalleries", this.getCottageGalleriesNames());
+		return "/administrace/cottageDetails";
+            
+                    }
 			cottageService.addCottage(cottage);
 		}
 		else
 		{	
+                    if(result.hasErrors()) { 
+                    logger.error(result.getAllErrors());   
+                    
+                    List<Cottage> listOfCottages = cottageService.getAllCottages();
+		
+                    model.addAttribute("cottage", cottage);
+                    model.addAttribute("listOfCottages", listOfCottages);
+                    model.addAttribute("cottageGroups", this.getCottageGroupNames());
+                    model.addAttribute("cottageGalleries", this.getCottageGalleriesNames());
+		return "/administrace/cottageDetails";
+            
+                    }
 			cottageService.updateCottage(cottage);
 		}
 		

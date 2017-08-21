@@ -1,68 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/mvc"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
         
-        <resources mapping="/resources/**" location="/resources/" />
-        <annotation-driven />
-    
-	<beans:bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/" />
-		<beans:property name="suffix" value=".jsp" />
-	</beans:bean>
+        <mvc:annotation-driven />
+        <mvc:resources mapping="/resources/**" location="/resources"/>
+        
+        
+	<bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
 
-	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
-		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<beans:property name="url"
-			value="jdbc:mysql://localhost:3306/ppro?useEncoding=true&amp;characterEncoding=UTF-8"/>
-		<beans:property name="username" value="root" />
-		<beans:property name="password" value="" />
-	</beans:bean>
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/ppro?characterEncoding=UTF-8"/>
+		<property name="username" value="root" />
+		<property name="password" value="" />
+	</bean>
 
 	<!-- Hibernate 4 SessionFactory Bean definition -->
-	<beans:bean id="hibernate4AnnotatedSessionFactory"
+	<bean id="hibernate4AnnotatedSessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<beans:property name="dataSource" ref="dataSource" />
-		<beans:property name="annotatedClasses">
-			<beans:list>
-				<beans:value>cz.uhk.fim.kulhama1.skolniprojectchaty.model.Image</beans:value>
-                                <beans:value>cz.uhk.fim.kulhama1.skolniprojectchaty.model.Gallery</beans:value>
-                                <beans:value>cz.uhk.fim.kulhama1.skolniprojectchaty.model.Group</beans:value>
-                                <beans:value>cz.uhk.fim.kulhama1.skolniprojectchaty.model.Address</beans:value>
-                                <beans:value>cz.uhk.fim.kulhama1.skolniprojectchaty.model.Cottage</beans:value>
-                                <beans:value>cz.uhk.fim.kulhama1.skolniprojectchaty.model.User</beans:value>
-                                <beans:value>cz.uhk.fim.kulhama1.skolniprojectchaty.model.UserAccount</beans:value>
-			</beans:list>
-		</beans:property>
-		<beans:property name="hibernateProperties">
-			<beans:props>
-				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
-				</beans:prop>
-				<beans:prop key="hibernate.show_sql">true</beans:prop>
-			</beans:props>
-		</beans:property>
-	</beans:bean>
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>cz.uhk.fim.kulhama1.skolniprojectchaty.model.Image</value>
+                                <value>cz.uhk.fim.kulhama1.skolniprojectchaty.model.Gallery</value>
+                                <value>cz.uhk.fim.kulhama1.skolniprojectchaty.model.Group</value>
+                                <value>cz.uhk.fim.kulhama1.skolniprojectchaty.model.Address</value>
+                                <value>cz.uhk.fim.kulhama1.skolniprojectchaty.model.Cottage</value>
+                                <value>cz.uhk.fim.kulhama1.skolniprojectchaty.model.User</value>
+                                <value>cz.uhk.fim.kulhama1.skolniprojectchaty.model.UserAccount</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
 
 	<context:component-scan base-package="cz.uhk.fim.kulhama1.skolniprojectchaty" />
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
-	<beans:bean id="transactionManager"
+	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-		<beans:property name="sessionFactory"
+		<property name="sessionFactory"
 			ref="hibernate4AnnotatedSessionFactory" />
-	</beans:bean>
+	</bean>
          
-        <beans:bean id="multipartResolver"
+        <bean id="multipartResolver"
 		 class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
                         <!-- setting maximum upload size -->
-                 <beans:property name="maxUploadSize" value="8281190" />
-        </beans:bean>
+                 <property name="maxUploadSize" value="8281190" />
+        </bean>
         
-</beans:beans>
+</beans>

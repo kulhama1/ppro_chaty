@@ -14,11 +14,17 @@ div.container {
     width: 100%;
     border: 1px solid gray;
 }
+div.popisky{
+    margin-left:15%;margin-top: 15px; height:175px;
+}
+p{
+    border: 1px solid gray;
+}
 
 header, footer {
     padding: 1em;
     color: white;
-    background-color: black;
+    background-color: SteelBlue;
     clear: left;
     text-align: center;
 }
@@ -30,13 +36,40 @@ nav {
     padding: 1em;
 }
 
-nav ul {
+ul {
     list-style-type: none;
+    margin: 0;
     padding: 0;
+    width: 160px;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
 }
-   
-nav ul a {
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
     text-decoration: none;
+    text-align: center;
+}
+a{
+    color: steelblue;
+    text-decoration: none;
+}
+
+li a.active {
+    background-color: SteelBlue;
+    color: white;
+}
+
+li a:hover:not(.active) {
+    background-color: #25A6E1;
+    color: white;
+}
+nav.fotky{
+    max-height: 175px;
+    max-width: 175px;
 }
 
 article {
@@ -45,6 +78,10 @@ article {
     padding: 1em;
     overflow: hidden;
 }
+h3{
+    text-align: center;
+}
+
 </style>
     </head>
     <body>
@@ -54,40 +91,36 @@ article {
    <h1>Chaty katalog</h1>
 </header>
   
-<nav>
   <ul>
+    <h3>Druhy chalup</h3>
     <c:forEach var="groups" items="${groups}">
+        
                                     <li>
                                         <li><a href="<c:url value='/filtr/${groups.id_group}' />">${groups.name}</a></li>
                                     </li>
                                 </c:forEach>
+                                    <h3>Informace</h3>
+                                    <li>
+                                        <li><a href="<c:url value='/kontakt/' />">Kontakt</a></li>
+                                        <li><a href="<c:url value='/info/' />">Info</a></li>
+                                    </li>
   </ul>
-</nav>
 
 <article>
-  <div class="template_wrap">
-                        <c:forEach var="cottage" items="${cottages}" varStatus="count">
-                            <c:if test="${((count.index mod 4) == 0)}">
-                                <div class="template_row clearfix">
-                            </c:if>
-                            
-                            <div class="template ${ ((count.index mod 4) == 0) ? "first" : ""} ${(((count.index+1) mod 4) == 0) ? "last" : ""}">
-                                <div class="image-wrap">
-                                    <a href="<spring:url value="/cottages_detail/${cottage.id_cottage}/" htmlEscape="true" />" class="image">
-                                        <img src="<c:url value="/resources/img/dummy_thumbnail.jpeg" />" title="${cottage.name}" height="225px" width="225px" />        
+                        <nav class="fotky">    
+                        <c:forEach var="cottage" items="${cottages}">
+                               <a href="<spring:url value="/cottages_detail/${cottage.id_cottage}/" htmlEscape="true" />" class="image">
+                                        <img src="${cottage.thumbnail.thumbnail_src}" htmlEscape="true" title="${cottage.name}" width="175" height="175" float="left"/>        
                                     </a>
-                                </div>
-                                <div class="template_description">
-                                    <a href="<spring:url value="/cottages_detail/${cottage.id_cottage}/" htmlEscape="true" />" class="template_name">${cottage.name}</a>
-                                    <p>${fn:substring(cottage.description, 0, 255)}<p>
-                                </div>
-                            </div> 
-                            
-                            <c:if test="${(((count.index+1) mod 4) == 0)}">
-                                </div>
-                            </c:if>
+                         </c:forEach>          
+                         </nav>
+                         <c:forEach var="cottage" items="${cottages}">   
+                                    <div class="popisky">
+                                    <a href="<spring:url value="/cottages_detail/${cottage.id_cottage}/" htmlEscape="true" />">${cottage.name}</a><br /> 
+                                    ${fn:substring(cottage.description, 0, 255)}
+                                    </div>     
                         </c:forEach>
-                        </div></article>
+</article>
 
 <footer>Copyright &copy; Martin Kulhánek</footer>
 

@@ -108,12 +108,12 @@ th {
 		</tr>
                 <tr>
 	  <td><form:label path="number_of_place">number_of_place</form:label></td>
-          <td><form:input path="number_of_place" size="30" maxlength="30"></form:input>
+          <td><form:input path="number_of_place" size="10" maxlength="30"></form:input>
               <form:errors path="number_of_place" /></td>
 		</tr>
                 <tr>
 	  <td><form:label path="price">Price</form:label></td>
-          <td><form:input path="price" size="30" maxlength="30"></form:input>
+          <td><form:input path="price" size="10" maxlength="30"></form:input>
               <form:errors path="price" /></td>
 		</tr>
 		<tr>
@@ -131,10 +131,9 @@ th {
 		<th width="120">Name gallery</th>
 		<th width="120">Skupina</th>
                 <th width="120">Name</th>
-                <th width="120">Description</th>
 		<th width="120">city</th>
-		<th width="120">number_of_place</th>
-                <th width="120">price</th>
+		<th width="10">number_of_place</th>
+                <th width="10">price</th>
 		<th width="60">Edit</th>
 		<th width="60">Delete</th>
 	</tr>
@@ -144,7 +143,6 @@ th {
 			<td>${cottage.gallery.name}</td>
 			<td>${cottage.group.name}</td>
                         <td>${cottage.name}</td>
-			<td>${cottage.description}</td>
 			<td>${cottage.city}</td>
 			<td>${cottage.number_of_place}</td>
 			<td>${cottage.price}</td>

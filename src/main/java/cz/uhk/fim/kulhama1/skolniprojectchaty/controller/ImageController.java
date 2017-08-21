@@ -68,7 +68,7 @@ public class ImageController {
 	public String add_image(Model model, @Valid @RequestParam("file") MultipartFile file, @ModelAttribute("image")Image image, HttpServletRequest request, BindingResult result) throws IOException {
 			i = new ImageIcon(file.getOriginalFilename());
         ServletContext context = request.getServletContext();
-        String rootPath = context.getRealPath("/");
+        String rootPath = "C:\\server/";
         if (!file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
@@ -113,8 +113,8 @@ public class ImageController {
             return "You failed to upload "
                     + " because the file was empty.";
         }
-        image.setImage_src("uploads/" +i);
-        image.setThumbnail_src("uploads/thumbnail/" +i);
+        image.setImage_src(rootPath + "uploads/" +i);
+        image.setThumbnail_src(rootPath + "uploads/thumbnail/" +i);
         imageService.addImage(image);
 		
 		
@@ -131,7 +131,7 @@ public class ImageController {
 	public String delete_image(@PathVariable("id") int id, Model model, HttpServletRequest request) {
         
         ServletContext context = request.getServletContext();
-        String rootPath = context.getRealPath("/");
+        String rootPath = "C:\\server/";
             
         Image image = imageService.getImagesById(id);
         image.getImage_src();

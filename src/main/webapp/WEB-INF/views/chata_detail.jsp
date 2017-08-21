@@ -13,20 +13,24 @@ div.container {
     width: 100%;
     border: 1px solid gray;
 }
+div.obrazky{
+    margin-left: 550px;
+}
 
 header, footer {
     padding: 1em;
     color: white;
-    background-color: black;
+    background-color: SteelBlue;
     clear: left;
     text-align: center;
 }
 
 nav {
     float: left;
-    max-width: 160px;
+    max-width: 450px;
     margin: 0;
     padding: 1em;
+    border-right: 1px solid gray;
 }
 
 nav ul {
@@ -52,14 +56,21 @@ article {
 </header>
 
 <article>
-  <h1>O chalupě: </h1>
-        <p>Druh chalupy: ${group.name}</p>
-        <p>Popis chalupy: ${cottage.description}</p>
+  <h2>O chalupě: </h2>
+  <nav>
+      <p><strong>Druh chalupy:</strong> ${group.name}</p>
+        <p><strong>Cena:</strong> ${cottage.price}</p>
+        <p><strong>Město:</strong> ${cottage.city}</p>
+        <p><strong>Počet míst:</strong> ${cottage.number_of_place}</p>
+        <p><strong>Popis chalupy:</strong> ${cottage.description}</p>
         <p>${group.description}</p>
-        <p>Cena: ${cottage.price}</p>
-        <p>Město: ${cottage.city}</p>
-        <p>Počet míst: ${cottage.number_of_place}</p>
         
+  </nav>
+        <div class="obrazky">
+        <c:forEach var="image" items="${images}" varStatus="count">
+            <img src="${image.image_src}" htmlEscape="true" title="${image.image_alt}" /></a>
+        </c:forEach>
+  </div>      
 </article>
 
 <footer>Copyright &copy; 2017 - Martin Kulhánek</footer>

@@ -19,7 +19,7 @@ div.container {
 header, footer {
     padding: 1em;
     color: white;
-    background-color: black;
+    background-color: steelblue;
     clear: left;
     text-align: center;
 }
@@ -55,8 +55,13 @@ article {
 </header>
 
 <article>
-  <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
-  <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
+<h2>O projektu</h2>
+    <p>Projekt vzniknul pro majitele chalup po celé ÈR, kde jim za poplatek zveøejníme na našem webu chalupu a domluvíme jim nájem. Zákazníci
+    potom pouze najdou chatu a pøes telefonní èíslo se domluví na pøípadném nájmu. Náš projekt je teprve v plenkách a jak je vidno chtìlo by to na nìm
+    ještì zapracovat. Do budoucna plánujeme rezervaèní formuláøe a další vychytávky</p>
+<h2>Kontakt</h2>    
+<p>Telefonní kontakt na chalupu naleznete v položce kontakt</p>
+
 </article>
 
 <footer>Copyright &copy; 2017 - Martin Kulhánek</footer>

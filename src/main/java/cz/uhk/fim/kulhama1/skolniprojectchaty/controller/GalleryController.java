@@ -60,7 +60,7 @@ public class GalleryController {
             try { 
             /* Return with errors */
             if(result.hasErrors()) { 
-                logger.error(result.getAllErrors());   
+                //logger.error(result.getAllErrors());
                 model.addAttribute("gallery", gallery);
                 return "administrace/galleryDetails";
             }
@@ -73,10 +73,20 @@ public class GalleryController {
 	}
         
         @RequestMapping(value = "/addUpdateGallery", method = RequestMethod.POST, headers = "Accept=application/json")
-	public String addUpdateGallery(@ModelAttribute("gallery") Gallery gallery) {
+	public String addUpdateGallery(Model model, @Valid @ModelAttribute("gallery") Gallery gallery, BindingResult result) {
+            try { 
+            /* Return with errors */
+            if(result.hasErrors()) { 
+                //logger.error(result.getAllErrors());
+                model.addAttribute("gallery", gallery);
+                return "administrace/galleryDetails";
+            }
+
             galleryService.updateGallery(gallery);
-            return "redirect:/getAllGalleries";
-                
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+	return "redirect:/getAllGalleries";
 	}
         
 

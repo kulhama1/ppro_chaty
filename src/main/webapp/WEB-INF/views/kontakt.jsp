@@ -19,7 +19,7 @@ div.container {
 header, footer {
     padding: 1em;
     color: white;
-    background-color: black;
+    background-color: steelblue;
     clear: left;
     text-align: center;
 }
@@ -55,9 +55,21 @@ article {
 </header>
 
 <article>
-  <h1>London</h1>
-  <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
-  <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
+    <p><strong>Bc. Martin Kulhánek</strong><br />
+                        <strong>Tel.:</strong> 776 553 498<br />
+                        <strong>E-mail:</strong> webmaster-trebihost@email.cz<br />
+                    </p>
+
+                    <p><strong>Adresa:</strong><br />
+                        Trebihost 207<br />
+                        544 01 Dvùr Králové nad Labem<br />
+                    </p>
+                    
+                    <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="500" height="300" src="https://maps.google.com/maps?hl=en&q=Trebihost&ie=UTF8&t=h&z=10&iwloc=B&output=embed">
+                      <div><small><a href="http://embedgooglemaps.com">embed google map</a></small></div>
+                      <div><small><a href="http://googlemapsgenerator.com">googlemapsgenerator.com</a></small></div>
+                    </iframe>
+  
 </article>
 
 <footer>Copyright &copy; 2017 - Martin Kulhánek</footer>
